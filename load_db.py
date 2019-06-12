@@ -1,6 +1,7 @@
 import tweepy
 import pymongo
 from pymongo import MongoClient
+import time
 import datetime as DT
 
 # Google developer API key
@@ -22,25 +23,28 @@ def get_all_tweets(screen_name):
 
     language = "en"
     today = DT.date.today()
+    # day_ago = today - DT.timedelta(days=1)
     week_ago = today - DT.timedelta(days=7)
+    
+    # new_tweets = api.search(q=screen_name +"since:2019-06-11 until:2019-06-12", lang=language, since=day_ago, count=100)
 
-    alltweets = []
-    new_tweets = api.search(q=screen_name, lang=language, since=week_ago, count=1000)
-    alltweets.extend(new_tweets)
-    print("all tweets length:"+str(len(alltweets)))
-    oldest = alltweets[-1].id - 1   
-    while len(new_tweets) > 0:
-        new_tweets = api.search(q=screen_name, lang=language, since=week_ago, count=1000, max_id=oldest)
-        alltweets.extend(new_tweets)
-        oldest = alltweets[-1].id - 1
+    page_count = 0  
+    for page in tweepy.Cursor(api.search, q=screen_name, lang=language, since=week_ago, until=today, count=100).pages():
+        page_count += 1
+        print("     >>>>> now on page ", page_count)
 
-        for tweet in alltweets: 
+        for tweet in page: 
             # if (tweet.retweeted):
             if ( (hasattr(tweet, 'retweeted_status')) ):
                 pass
             else:
                 tweets.insert_one(tweet._json)
                 print("Method execution is finished.")
+
+        time.sleep(5)
+        print ("    ...%s tweets downloaded so far" % (len(page)))
+        if page_count >= 200:  
+            break
 
 # The Twitter users who we want to get tweets from
 candidates = ["@realDonaldTrump", "@BernieSanders", "@JoeBiden", "@SenWarren", "@GovBillWeld", "@JohnDelaney", "@KamalaHarris"]
