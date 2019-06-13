@@ -22,18 +22,16 @@ def get_all_tweets(screen_name):
     api = tweepy.API(auth, wait_on_rate_limit=True)
 
     page_count = 0  
-    for page in tweepy.Cursor(api.user_timeline, screen_name=screen_name, count=200).pages():
+    for page in tweepy.Cursor(api.user_timeline, screen_name=screen_name, count=200).pages(100):
         page_count += 1
         print("     >>>>> now on page ", page_count)
 
         for tweet in page: 
             tweets.insert_one(tweet._json)
-            print("Method execution is finished.")
 
-        time.sleep(5)
+        time.sleep(1)
         print ("    ...%s tweets downloaded so far" % (len(page)))
-        if page_count >= 100:  
-            break
+
 
 # The Twitter users who we want to get tweets from
 candidates = ["@realDonaldTrump", "@BernieSanders", "@JoeBiden", "@SenWarren", "@GovBillWeld", "@JohnDelaney", "@KamalaHarris"]
