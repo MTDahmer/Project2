@@ -1,0 +1,51 @@
+create procfile 
+
+
+create gitgnore: add config.py
+__pycache__
+
+then add heroku 
+type : heroku create project-pres
+
+now conform with git remote -v.. see remore connetions 
+
+now create envirement : 
+
+type: conda create -n name python=3.7  
+mac: type conda activate name
+windows: source activate name   ****name of envirement will appear in left side of command prompt 
+
+now confirm packages installed : 
+type pip freeze 
+
+
+
+now install packages needed based on python flask app
+
+**must install gunicorn
+
+after packages installed verfiy with : 
+pip freeze 
+
+then out put freeze to file 
+pip freeze > requirements.txt 
+
+now commmit and add to git hub .. run local first then 
+if ready commit to heroku
+
+git add -A
+git commit -m 
+
+then git push heroku
+
+if not running 
+check error logs 
+type : heroku logs
+
+****side note mongo is not installed  left off at 31.31 time ***conda deactivate=++
+get around gitignore for config.py type : in flask app enter print(os.environ)
+** on heroku install data base  an upload files : mongoDB... : heroku dashbord > resources > addon > settings
+if os.envirom[]
+	import config
+
+
