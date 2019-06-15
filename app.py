@@ -10,12 +10,13 @@ from bson.json_util import dumps
 
 
 app = Flask(__name__)
-
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
-DBS_NAME = 'db_twitter_handle'
+client = MongoClient(mongodb, "mongo//:localhost:27017/db_twitter_handle")
+# MONGODB_HOST = 'localhost'
+# MONGODB_PORT = 27017
+# DBS_NAME = 'db_twitter_handle'
+# COLLECTION ="Tweets_from_@BernieSanders"
 candidates = ["@realDonaldTrump", "@BernieSanders", "@JoeBiden", "@SenWarren", "@GovBillWeld", "@JohnDelaney", "@KamalaHarris"]
-FIELDS = {'created_at': True, 'text': True, 'favourite_count': True, 'tweet_count': True, 'user': True}
+# FIELDS = {'created_at': True, 'text': True, 'favourite_count': True, 'tweet_count': True, 'user': True}
 
 
 @app.route("/")
@@ -23,19 +24,13 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
-@app.route("/d")
-def data():
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    for candidate in candidates:
-        collection = connection[DBS_NAME]["Tweets_from_" + candidate[i]]
-        projects = collection.find(projection=FIELDS)
-        json_projects = []
-        for project in projects:
-            json_projects.append(project)
-        json_projects = json.dumps(json_projects, default=json_util.default)
-        connection.close()
-    print(json_projects)
-    return json_projects
+@app.route("/data/<chosenCandidate>")
+def data(chosenCandidate):
+    db = client.db_twitter_handle
+    collection1 = "Tweets_from_" + chosenCandidate
+    holder = db.collection1
+    print(holder)
+    return(holder)
 
 
 if __name__ == "__main__":
