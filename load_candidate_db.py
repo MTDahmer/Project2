@@ -28,7 +28,7 @@ def get_all_tweets(screen_name):
     tweet_retweets = 0
 
     page_count = 0  
-    for page in tweepy.Cursor(api.user_timeline, screen_name=screen_name, count=200).pages(100):
+    for page in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode='extended', count=200).pages(100):
         page_count += 1
         print("     >>>>> now on page ", page_count)
 
@@ -44,6 +44,7 @@ def get_all_tweets(screen_name):
         time.sleep(1)
         print ("    ...%s tweets downloaded so far" % (len(page)))
     candidate_meta_dict["candidate"] = candidate_name
+    candidate_meta_dict["screenName"] = screen_name
     candidate_meta_dict["retweetAvg"] = tweet_retweets/tweet_count
     candidate_meta_dict["favoriteAvg"] = tweet_favorites/tweet_count
     return candidate_meta_dict
