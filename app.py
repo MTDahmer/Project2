@@ -22,11 +22,9 @@ def index():
 @app.route("/data/<chosenCandidate>", methods=['GET'])
 def data(chosenCandidate):
     tweet = mongo.db["Tweets_from_" + chosenCandidate]
-
-    # tweet = mongo.db.collection
     output = []
     for t in tweet.find():
-      output.append({'id' : t['id'], 'created' : t['created_at'], 'tweet' : t['text']})
+      output.append({'created_at': t['created_at'], 'text': t['text'], 'favourite_count': t['favorite_count'], 'retweet_count': t['retweet_count'], 'user': t['user']})
     return jsonify({'result' : output})
 
 
