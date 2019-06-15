@@ -24,7 +24,7 @@ def data(chosenCandidate):
     tweet = mongo.db["Tweets_from_" + chosenCandidate]
     output = []
     for t in tweet.find():
-      output.append({'created_at': t['created_at'], 'text': t['text'], 'favourite_count': t['favorite_count'], 'retweet_count': t['retweet_count'], 'user': t['user']})
+      output.append({'created_at': t['created_at'], 'text': t['text'], 'favourite_count': t['favorite_count'], 'retweet_count': t['retweet_count'], 'followers': t['user']['followers_count']})
     return jsonify({'result' : output})
 
 
