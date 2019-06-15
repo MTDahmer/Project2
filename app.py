@@ -5,8 +5,6 @@ import pandas as pd
 import numpy as np
 from pymongo import MongoClient
 import json
-from bson import json_util
-from bson.json_util import dumps
 
 
 app = Flask(__name__)
@@ -27,6 +25,14 @@ def data(chosenCandidate):
       output.append({'created_at': t['created_at'], 'text': t['text'], 'favourite_count': t['favorite_count'], 'retweet_count': t['retweet_count'], 'followers': t['user']['followers_count']})
     return jsonify({'result' : output})
 
+@app.route("/metadata", methods=['GET'])
+def metadata():
+    favorites = mongo.db["metadata"]
+
+    output = []
+    for f in favorites.find():
+        output.append({'name' : f['candidate'], 'retweets' : f['retweetAvg'], 'favorites': f['favoriteAvg']})
+    return jsonify({'result' : output})
 
 if __name__ == "__main__":
     app.run()
