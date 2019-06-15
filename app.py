@@ -10,27 +10,24 @@ from bson.json_util import dumps
 
 
 app = Flask(__name__)
-client = MongoClient(mongodb, "mongo//:localhost:27017/db_twitter_handle")
-# MONGODB_HOST = 'localhost'
-# MONGODB_PORT = 27017
-# DBS_NAME = 'db_twitter_handle'
-# COLLECTION ="Tweets_from_@BernieSanders"
-candidates = ["@realDonaldTrump", "@BernieSanders", "@JoeBiden", "@SenWarren", "@GovBillWeld", "@JohnDelaney", "@KamalaHarris"]
-# FIELDS = {'created_at': True, 'text': True, 'favourite_count': True, 'tweet_count': True, 'user': True}
 
+app.config['MONGO_URI'] = os.environ.get('DATABASE_URL', '') or "mongodb://localhost:27017/db_twitter_handle"
+mongo = PyMongo(app)
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html")
 
-@app.route("/data/<chosenCandidate>")
+@app.route("/data/<chosenCandidate>", methods=['GET'])
 def data(chosenCandidate):
-    db = client.db_twitter_handle
-    collection1 = "Tweets_from_" + chosenCandidate
-    holder = db.collection1
-    print(holder)
-    return(holder)
+    tweet = mongo.db["Tweets_from_" + chosenCandidate]
+
+    # tweet = mongo.db.collection
+    output = []
+    for t in tweet.find():
+      output.append({'id' : t['id'], 'created' : t['created_at'], 'tweet' : t['text']})
+    return jsonify({'result' : output})
 
 
 if __name__ == "__main__":
