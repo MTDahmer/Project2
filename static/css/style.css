@@ -17,6 +17,16 @@ h1 {
     color: white;
 }
 
+#chart_three {
+    width: 100%;
+    background-color: #eeeeee;
+  }
+#chart_three svg {
+    height: 400px;
+    width: 100%;
+  }
+  
+
 @media(max-width: 500px) {
     .jumbotron h1 {
         animation: smaller-title 1.2s forwards linear;
