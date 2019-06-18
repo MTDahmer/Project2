@@ -37,19 +37,23 @@ function buildBarChart(){
 
       nv.addGraph(function ()
       {
-      var chart = nv.models.multiBarChart()
-          .x(function (d) {
-           return d.label; // Configure x axis to use the "label" within the json.
-          })
-          .y(function (d) {
-            return d.value; // Configure y axis to use the "value" within the json.
-          }).margin({top: 30, right: 20, bottom: 50, left: 85}) // Add some CSS Margin to the chart.
-          .showControls(false) // Turn of switchable control
-          .stacked(false); // Force stacked mode.
+        var chart = nv.models.multiBarChart()
+        .x(function (d) {
+         return d.label; // Configure x axis to use the "label" within the json.
+        })
+        .y(function (d) {
+          return d.value; // Configure y axis to use the "value" within the json.
+        }).margin({top: 30, right: 20, bottom: 100, left: 85}) // Add some CSS Margin to the chart.
+        // .forceY(-5000)
+        .reduceXTicks(false)
+        .showControls(false) // Turn of switchable control
+        .stacked(false); // Force stacked mode.
 
-      chart.xAxis.axisLabel('Candidates'); // add label to the horizontal axis
+      // chart.xAxis.axisLabel('Candidates'); // add label to the horizontal axis
 
       chart.yAxis.tickFormat(d3.format('0f')); // Round the yAxis values
+ 
+      chart.rotateLabels(-45);
 
       d3.select('#chart_three svg') // Select the html element by ID
           .datum(correctData) // Pass in the data
