@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 app.config['MONGO_URI'] = os.environ.get('DATABASE_URL', '') or "mongodb://localhost:27017/db_twitter_handle"
 mongo = PyMongo(app)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route("/")
 def index():

@@ -14,7 +14,7 @@ function init() {
   
     // Use the first sample from the list to build the initial plots
     const handle = candidates[0]["screenName"];
-    // buildCharts(handle);
+    buildCharts(handle);
     buildBarChart();
     buildTrumpBarChart();
   });
@@ -22,7 +22,7 @@ function init() {
 
 function optionChanged(newCandidate) {
   // Fetch new data each time a new candidate is selected
-  // buildCharts(newCandidate);
+  buildCharts(newCandidate);
 }
 
 init();
