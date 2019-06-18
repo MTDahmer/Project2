@@ -16,6 +16,7 @@ function init() {
     const handle = candidates[0]["screenName"];
     // buildCharts(handle);
     buildBarChart();
+    buildTrumpBarChart();
   });
 }
 

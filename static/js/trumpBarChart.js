@@ -1,4 +1,4 @@
-function buildBarChart(){
+function buildTrumpBarChart(){
     d3.json("/metadata", function(data){
       
       var retweetList = [];
@@ -8,7 +8,7 @@ function buildBarChart(){
 
       // building necessary structure for dvd3 graph
       data.forEach((item)=>{
-        if (item["name"] != "Donald J. Trump"){
+        if (item["name"] == "Donald J. Trump"){
           retweetDictionary = 
             {
               label: item["name"],
@@ -45,9 +45,10 @@ function buildBarChart(){
         })
         .y(function (d) {
           return d.value; // Configure y axis to use the "value" within the json.
-        }).margin({top: 30, right: 20, bottom: 100, left: 85}) // Add some CSS Margin to the chart.
+        }).margin({top: 30, right: 20, bottom: 50, left: 50}) // Add some CSS Margin to the chart.
         // .forceY(-5000)
         .reduceXTicks(false)
+        .showLegend(false)
         .showControls(false) // Turn of switchable control
         .stacked(false); // Force stacked mode.
 
@@ -55,9 +56,9 @@ function buildBarChart(){
 
       chart.yAxis.tickFormat(d3.format('0f')); // Round the yAxis values
  
-      chart.rotateLabels(-45);
+      // chart.rotateLabels(-45);
 
-      d3.select('#chart_three svg') // Select the html element by ID
+      d3.select('#chart_four svg') // Select the html element by ID
           .datum(correctData) // Pass in the data
           .transition().duration(500) // Set transition speed
           .call(chart); // Call & Render chart
