@@ -9,22 +9,27 @@ import json
 
 app = Flask(__name__)
 
-app.config['MONGO_URI'] = os.environ.get('DATABASE_URL', '') or "mongodb://localhost:27017/db_twitter_handle"
+app.config['MONGO_URI'] = os.environ.get(
+    'MONGODB_URI', '') or "mongodb://localhost:27017/db_twitter_handle"
 mongo = PyMongo(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html")
 
+
 @app.route("/data/<chosenCandidate>", methods=['GET'])
 def data(chosenCandidate):
     tweet = mongo.db["Tweets_from_" + chosenCandidate]
     output = []
     for t in tweet.find():
-      output.append({'created_at': t['created_at'], 'text': t['full_text'], 'favourite_count': t['favorite_count'], 'retweet_count': t['retweet_count'], 'followers': t['user']['followers_count']})
-    return jsonify({'result' : output})
+        output.append({'created_at': t['created_at'], 'text': t['full_text'], 'favourite_count': t['favorite_count'],
+                       'retweet_count': t['retweet_count'], 'followers': t['user']['followers_count']})
+    return jsonify({'result': output})
+
 
 @app.route("/metadata", methods=['GET'])
 def metadata():
@@ -32,8 +37,10 @@ def metadata():
 
     output = []
     for f in favorites.find():
-        output.append({'name' : f['candidate'], 'screenName' : f['screenName'], 'retweets' : f['retweetAvg'], 'favorites': f['favoriteAvg']})
+        output.append({'name': f['candidate'], 'screenName': f['screenName'],
+                       'retweets': f['retweetAvg'], 'favorites': f['favoriteAvg']})
     return jsonify(output)
+
 
 @app.route("/names", methods=['GET'])
 def names():
@@ -42,6 +49,7 @@ def names():
     for f in favorites.find():
         output.append(f['candidate'])
     return jsonify(output)
+
 
 if __name__ == "__main__":
     app.run()
