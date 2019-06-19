@@ -5,11 +5,15 @@ import time
 import datetime
 
 # Twitter developer API key
-from config import consumer_key, consumer_secret, access_token, access_token_secret
+from config import consumer_key, consumer_secret, access_token, access_token_secret, MONGO_HOST, MONGO_PORT, MONGO_DB, MONGO_USER, MONGO_PASS
 
-def get_all_tweets(screen_name): 
-    client = MongoClient()
-    db = client.db_twitter_handle
+
+def get_all_tweets(screen_name):
+    # client = MongoClient()
+    con = pymongo.MongoClient(MONGO_HOST, MONGO_PORT)
+    db = con[MONGO_DB]
+    db.authenticate(MONGO_USER, MONGO_PASS)
+    # db = client.db_twitter_handle
     col = "Tweets_from_"+screen_name
     tweets = db[col]
 
@@ -31,13 +35,13 @@ def get_all_tweets(screen_name):
     current_year = datetime.datetime.now().year
     # past_year = current_year - 4
 
-    page_count = 0  
+    page_count = 0
     for page in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode='extended', count=200).pages(100):
         page_count += 1
         print("     >>>>> now on page ", page_count)
 
         for tweet in page:
-            if (tweet.created_at.year == current_year): 
+            if (tweet.created_at.year == current_year):
                 # add tweet to this candidate collection
                 tweets.insert_one(tweet._json)
                 # collect stats for this candidate to be added to a metadata collection
@@ -47,7 +51,7 @@ def get_all_tweets(screen_name):
                 tweet_retweets += tweet.retweet_count
 
         time.sleep(1)
-        print ("    ...%s tweets evaluated so far" % (len(page)))
+        print("    ...%s tweets evaluated so far" % (len(page)))
     candidate_meta_dict["candidate"] = candidate_name
     candidate_meta_dict["screenName"] = screen_name
     candidate_meta_dict["retweetAvg"] = tweet_retweets/tweet_count
@@ -55,24 +59,27 @@ def get_all_tweets(screen_name):
     return candidate_meta_dict
 
 
-def add_to_metadata(candidateDictionary): 
-    client = MongoClient()
-    db = client.db_twitter_handle
+def add_to_metadata(candidateDictionary):
+    # client = MongoClient()
+    # db = client.db_twitter_handle
+    con = pymongo.MongoClient(MONGO_HOST, MONGO_PORT)
+    db = con[MONGO_DB]
+    db.authenticate(MONGO_USER, MONGO_PASS)
     col = "metadata"
     meta = db[col]
 
     # Update the Mongo database using update and upsert=True
     meta.insert_one(candidateDictionary)
- 
+
 
 # The Twitter users who we want to get tweets from
 # candidates = ["@realDonaldTrump", "@BernieSanders", "@JoeBiden", "@SenWarren", "@GovBillWeld", "@JohnDelaney", "@KamalaHarris"]
-candidates = ["@MichaelBennet", "@JoeBiden", "@BilldeBlasio", "@CoryBooker", "@GovernorBullock", "@PeteButtigieg", 
-"@JulianCastro", "@JohnDelaney", "@TulsiGabbard", "@SenGillibrand", "@MikeGravel", "@KamalaHarris", "@Hickenlooper",
- "@JayInslee", "@amyklobuchar", "@WayneMessam", "@sethmoulton", "@BetoORourke", "@TimRyan", "@BernieSanders", "@ericswalwell",
- "@realDonaldTrump", "@ewarren", "@GovBillWeld", "@marwilliamson", "@AndrewYang"]
+candidates = ["@MichaelBennet", "@JoeBiden", "@BilldeBlasio", "@CoryBooker", "@GovernorBullock", "@PeteButtigieg",
+              "@JulianCastro", "@JohnDelaney", "@TulsiGabbard", "@SenGillibrand", "@MikeGravel", "@KamalaHarris", "@Hickenlooper",
+              "@JayInslee", "@amyklobuchar", "@WayneMessam", "@sethmoulton", "@BetoORourke", "@TimRyan", "@BernieSanders", "@ericswalwell",
+              "@realDonaldTrump", "@ewarren", "@GovBillWeld", "@marwilliamson", "@AndrewYang"]
 
-#"@POTUS", "@SenWarren", 
+#"@POTUS", "@SenWarren",
 
 for name in candidates:
     try:
@@ -81,4 +88,3 @@ for name in candidates:
     except pymongo.errors.DuplicateKeyError:
         print("DuplicateKeyError")
         continue
-
