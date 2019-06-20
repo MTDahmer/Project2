@@ -1,10 +1,13 @@
-# Project2
+# Indecision 2020
 
-add a config.py file with the following data 
+https://frozen-cliffs-48809.herokuapp.com/
 
-consumer_key = "Your Consumer Key"  
-consumer_secret = "your Consumer Secret"  
-access_token = "Your Access Token"  
-access_token_secret = "Your Access Token Secret"  
+This app attempts to look at the current 2020 presidential candidates presence on twitter  
+in terms of followers, retweets and 'liked' tweets (favorites). We also look at certain  
+(pre-defined) terms to see how often the candidates are mentioning them in their tweets.  
 
-Run load_candidate_db.py
+We utilized the Twitter API with the python tweepy wrapper to get our data from each  
+candidates twitter account. We use MongoDB, Flask and javascript (nvd3) to build a dashboard  
+plotting our findings. The app has been uploaded to Heroku and can be accessed at the  
+above link.
+
