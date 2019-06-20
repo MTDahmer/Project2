@@ -17,7 +17,15 @@ h1 {
     line-height: 1;
     color: white;
 }
-
+#chart_two {
+    width: 100%;
+    background-color: #eeeeee;
+    margin: 20px;
+}
+#chart_two svg {
+    height:200px;
+    width:100%;
+}
 #chart_three {
     width: 100%;
     background-color: #eeeeee;
