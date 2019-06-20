@@ -28,14 +28,14 @@ function buildBarChart(){
 
       var correctData = [
         {
+          key: "Likes",
+          color: "1f77b4",
+          values: favoriteList
+        },
+        {
           key: "Retweets",
           color: "d62728",
           values: retweetList
-        },
-        {
-          key: "Favorites",
-          color: "1f77b4",
-          values: favoriteList
         }
       ];
 

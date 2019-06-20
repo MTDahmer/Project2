@@ -16,6 +16,7 @@ function init() {
     const handle = candidates[0]["screenName"];
     // buildCharts(handle);
     buildLineGraph(handle);
+    buildGaugeChart(handle);
     buildBarChart();
     buildTrumpBarChart();
   });
@@ -25,6 +26,7 @@ function optionChanged(newCandidate) {
   // Fetch new data each time a new candidate is selected
   // buildCharts(newCandidate);
   buildLineGraph(newCandidate);
+  buildGaugeChart(newCandidate);
 }
 
 init();

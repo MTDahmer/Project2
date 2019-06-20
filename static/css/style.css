@@ -1,5 +1,6 @@
 body {
-    background: url(images/image_two.jpg)
+    background: url(images/image_two.jpg);
+    background-color: blue;
 }
 
 .jumbotron {
@@ -25,7 +26,7 @@ h1 {
     height: 400px;
     width: 100%;
   }
-  #chart_four {
+ #chart_four {
     width: 100%;
     background-color: #eeeeee;
   }
