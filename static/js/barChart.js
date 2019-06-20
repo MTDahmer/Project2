@@ -8,6 +8,8 @@ function buildBarChart(){
 
       // building necessary structure for dvd3 graph
       data.forEach((item)=>{
+        // not including Trump as his numbers are way off scale with other candidates
+        // he will have his own chart; see trumpBarChart.js
         if (item["name"] != "Donald J. Trump"){
           retweetDictionary = 
             {

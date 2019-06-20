@@ -6,7 +6,7 @@ function buildTrumpBarChart(){
       var retweetDictionary = {};
       var favoritesDictionary = {};
 
-      // building necessary structure for dvd3 graph
+      // building necessary structure for dvd3 graph only for Trump
       data.forEach((item)=>{
         if (item["name"] == "Donald J. Trump"){
           retweetDictionary = 
