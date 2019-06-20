@@ -37,17 +37,8 @@ def metadata():
 
     output = []
     for f in favorites.find():
-        output.append({'name': f['candidate'], 'screenName': f['screenName'],
+        output.append({'name': f['candidate'], 'screenName': f['screenName'], 'followers': f['followers'],
                        'retweets': f['retweetAvg'], 'favorites': f['favoriteAvg']})
-    return jsonify(output)
-
-
-@app.route("/names", methods=['GET'])
-def names():
-    favorites = mongo.db["metadata"]
-    output = []
-    for f in favorites.find():
-        output.append(f['candidate'])
     return jsonify(output)
 
 
