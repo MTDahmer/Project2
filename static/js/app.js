@@ -24,7 +24,7 @@ function init() {
 
 function optionChanged(newCandidate) {
   // Fetch new data each time a new candidate is selected
-  // buildCharts(newCandidate);
+  buildCharts(newCandidate);
   buildLineGraph(newCandidate);
   buildGaugeChart(newCandidate);
 }
