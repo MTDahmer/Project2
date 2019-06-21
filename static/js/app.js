@@ -14,7 +14,7 @@ function init() {
   
     // Use the first sample from the list to build the initial plots
     const handle = candidates[0]["screenName"];
-    // buildCharts(handle);
+    buildCharts(handle);
     buildLineGraph(handle);
     buildGaugeChart(handle);
     buildBarChart();
