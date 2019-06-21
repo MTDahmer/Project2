@@ -13,12 +13,10 @@ function buildCharts(chosenCandidate) {
     w.forEach((topic)=>{
       hat = countwords(topic);
       topic_x.push(hat);
-
-      console.log(hat);
+    
     });
     
-    console.log(topic_x);
-    //  console.log(countwords('health'));
+
 
     var var_topics = [
       {key: "Healthcare", y: topic_x[0], color: "#5F5"},
@@ -31,7 +29,7 @@ function buildCharts(chosenCandidate) {
       {key: "Climate", y: topic_x[7]}
     ];
 
-    console.log(var_topics);
+   
 
     var height = 400;
     var width = 400;
@@ -44,20 +42,14 @@ function buildCharts(chosenCandidate) {
           .width(width)
           .height(height)
           .growOnHover(false)
-          .labelType('key')
+          .labelThreshold(.05)
+          .labelType('percent')
           .showTooltipPercent(true);
 
         d3.select("#chart_one svg")
           .datum(var_topics)
           .transition().duration(10)
           .call(chart);
-
-        // // update chart data values randomly
-        // setInterval(function() {
-        //   var_topics[0].y = Math.floor(Math.random() * 10);
-        //   var_topics[1].y = Math.floor(Math.random() * 10);
-        //   chart.update();
-        // }, 4000);
         return chart;
       });
 
@@ -66,7 +58,7 @@ function buildCharts(chosenCandidate) {
   }
 
 function countwords(word){
-  // var res = a.join().match(/word/g);
+
   var re = new RegExp(word.toLowerCase(), 'g');
   var res = a.join().match(re);
   console.log(res);
