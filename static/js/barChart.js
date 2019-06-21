@@ -61,7 +61,7 @@ function buildBarChart(){
 
       d3.select('#chart_three svg') // Select the html element by ID
           .datum(correctData) // Pass in the data
-          .transition().duration(500) // Set transition speed
+          .transition().duration(10) // Set transition speed
           .call(chart); // Call & Render chart
       
       nv.utils.windowResize(chart.update); // Intitiate listener for window resize so the chart responds and changes width.

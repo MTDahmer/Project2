@@ -18,6 +18,11 @@ h1 {
     color: white;
 }
 
+.nvd3 {
+    font-size: 14px; 
+    font-weight: bold; 
+}
+
 #chart_three {
     width: 100%;
     background-color: #eeeeee;
