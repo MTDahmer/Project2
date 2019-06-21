@@ -7,7 +7,7 @@ body {
     font-size: 0.1rem;
     animation: title 1.2s forwards linear;
     background: url(images/image.jpg);
-    color: white
+    color: red;
 }
 
 h1 {
@@ -15,12 +15,12 @@ h1 {
     font-size: 5em;
     font-weight: 900;
     line-height: 1;
-    color: white;
+    color: red;
 }
 
 .nvd3 {
-    font-size: 14px; 
-    font-weight: bold; 
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #chart_one {
@@ -35,26 +35,29 @@ h1 {
 }
 
 #chart_two svg {
-    height:200px;
-    width:100%;
+    height: 200px;
+    width: 100%;
 }
 
 #chart_three {
     width: 100%;
     background-color: #eeeeee;
-  }
+}
+
 #chart_three svg {
     height: 400px;
     width: 100%;
-  }
- #chart_four {
+}
+
+#chart_four {
     width: 100%;
     background-color: #eeeeee;
-  }
+}
+
 #chart_four svg {
     height: 400px;
     width: 100%;
-  }
+}
 
 @media(max-width: 500px) {
     .jumbotron h1 {
