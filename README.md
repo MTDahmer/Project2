@@ -19,18 +19,6 @@ candidate's twitter account. We use MongoDB, Flask and javascript (nvd3) to buil
 plotting our findings. The app has been uploaded to Heroku and can be accessed at the  
 above link.
 
-Group members : 
-
-Amy Claman : created  load_candidate_db.py helped with app.py created bulletChart.js barChart.js trumpBarChart
-
-Jerome Urioste: created index.html setup  heroku database and helped Load_candidate_db.py connet to mongoDB . configered project for 
-deploment on heroku 
-
-Bennett Farrington: created PieChart.js helped with flask app.py 
-
-Mitchell Dahmer: created LineGraph.js helped with app.py (flask app) PieChart 
-
-
 You can select a Democrat candidate that will change each if the first three charts to track that candidates’ tweets: 
 Bar chart that will track favorites
 Pie chart that will track subjects being tweeted
@@ -52,6 +40,16 @@ threw and append the output screen name candidate retweet avg favorite Avg and s
 index .html static folder has all the JavaScript files required to load the Graphs 
 app.js loads the data and other JS files that are required. 
 
+### Group members : 
+
+### Amy Claman : created  load_candidate_db.py helped with app.py created bulletChart.js barChart.js trumpBarChart
+
+### Jerome Urioste: created index.html setup  heroku database and helped Load_candidate_db.py connet to mongoDB . configered project for 
+### deploment on heroku 
+
+### Bennett Farrington: created PieChart.js helped with flask app.py 
+
+### Mitchell Dahmer: created LineGraph.js helped with app.py (flask app) PieChart 
 
 
 
