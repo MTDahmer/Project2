@@ -2,14 +2,12 @@
 function buildLineGraph(chosenCandidate) {
 var url = `/data/${chosenCandidate}`;
 d3.json(url, function(data){
-    console.log(data);
     likeDic = {};
     retweetDic = {};
     likeData = [];
     retweetData = [];
     data.result.forEach((tweet)=> {
       var date1 = Date.parse(tweet['created_at']);
-      console.log(date1);
       likeDic = {
         x : date1,
         y : tweet['favourite_count']
@@ -21,8 +19,6 @@ d3.json(url, function(data){
       likeData.push(likeDic);
       retweetData.push(retweetDic);
     });
-    console.log(likeData);
-    console.log(retweetData);
        
     var finalData = [
       {
@@ -42,11 +38,16 @@ d3.json(url, function(data){
 
 nv.addGraph(function() {
     var chart = nv.models.lineChart()
-    .useInteractiveGuideline(true);       
+    .showLegend(true)       
+    .showYAxis(true)        
+    .showXAxis(true) ;       
 
     chart.xAxis
       .axisLabel('Date')
-      ;
+      .ticks(d3.time.months) // <-- add formatter for the ticks
+      .tickFormat(function(d) {
+                return d3.time.format('%m-%y')(new Date(d))})
+            ;
   
     chart.yAxis
       .axisLabel('# of likes/retweets')
@@ -54,7 +55,7 @@ nv.addGraph(function() {
   
     d3.select('#chart_two svg')
       .datum(finalData)
-      .transition().duration(500)
+      .transition().duration(10)
       .call(chart)
       ;
   
