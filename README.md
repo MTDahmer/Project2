@@ -10,7 +10,7 @@
 
 
 
-This app attempts to look at the current 2020 presidential candidates presence on twitter  
+This app was a group project we to look at the current 2020 presidential candidates presence on twitter  
 in terms of followers, retweets and 'liked' tweets (favorites). We also look at certain  
 (pre-defined) terms to see how often the candidates are mentioning them in their tweets.  
 
@@ -18,6 +18,17 @@ We utilized the Twitter API with the python tweepy wrapper to get our data from 
 candidate's twitter account. We use MongoDB, Flask and javascript (nvd3) to build a dashboard  
 plotting our findings. The app has been uploaded to Heroku and can be accessed at the  
 above link.
+
+Group members : 
+
+Amy Claman : created  load_candidate_db.py helped with app.py created bulletChart.js barChart.js trumpBarChart
+
+Jerome Urioste: created index.html setup  heroku database and helped Load_candidate_db.py connet to mongoDB . configered project for 
+deploment on heroku 
+
+Bennett Farrington: created PieChart.js helped with flask app.py 
+
+Mitchell Dahmer: created LineGraph.js helped with app.py (flask app) PieChart 
 
 
 You can select a Democrat candidate that will change each if the first three charts to track that candidates’ tweets: 
@@ -40,3 +51,7 @@ threw and append the output screen name candidate retweet avg favorite Avg and s
 
 index .html static folder has all the JavaScript files required to load the Graphs 
 app.js loads the data and other JS files that are required. 
+
+
+
+
