@@ -16,7 +16,7 @@ function init() {
     const handle = candidates[0]["screenName"];
     buildCharts(handle);
     buildLineGraph(handle);
-    buildGaugeChart(handle);
+    buildBulletChart(handle);
     buildBarChart();
     buildTrumpBarChart();
   });
@@ -24,6 +24,7 @@ function init() {
 
 function optionChanged(newCandidate) {
   // Fetch new data each time a new candidate is selected
+  buildBulletChart(newCandidate);
   buildCharts(newCandidate);
   buildLineGraph(newCandidate);
   buildGaugeChart(newCandidate);
