@@ -23,6 +23,11 @@ h1 {
     font-weight: bold; 
 }
 
+#chart_one {
+    height: 400px;
+    width: 100%;
+}
+
 #chart_two {
     width: 100%;
     background-color: #eeeeee;
