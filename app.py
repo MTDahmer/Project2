@@ -9,8 +9,7 @@ import json
 
 app = Flask(__name__)
 
-app.config['MONGO_URI'] = os.environ.get(
-    'MONGODB_URI', 'mongodb://heroku_lql33jhv:m6km4aqppguggitp33bp0enh47@ds339177.mlab.com:39177/heroku_lql33jhv') or "mongodb://localhost:27017/db_twitter_handle"
+app.config['MONGO_URI'] = os.environ.get('MONGODB_URI') or "mongodb://localhost:27017/db_twitter_handle"
 mongo = PyMongo(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
@@ -40,6 +39,13 @@ def metadata():
         output.append({'name': f['candidate'], 'screenName': f['screenName'], 'followers': f['followers'],
                        'retweets': f['retweetAvg'], 'favorites': f['favoriteAvg']})
     return jsonify(output)
+    
+
+@app.route("/followercount/<chosenCandidate>", methods=['GET'])
+def followercount(chosenCandidate):
+    metadata = mongo.db["metadata"]
+    candidateMeta = metadata.find_one( {"screenName": chosenCandidate} )
+    return jsonify({'result': [candidateMeta['followers']]})
 
 
 if __name__ == "__main__":

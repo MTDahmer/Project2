@@ -1,6 +1,6 @@
 # Indecision 2020
 
-https://frozen-cliffs-48809.herokuapp.com/
+
 
 This app attempts to look at the current 2020 presidential candidates presence on twitter  
 in terms of followers, retweets and 'liked' tweets (favorites). We also look at certain  
