@@ -1,11 +1,6 @@
 from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 import os
-import pandas as pd
-import numpy as np
-from pymongo import MongoClient
-import json
-
 
 app = Flask(__name__)
 
@@ -39,7 +34,7 @@ def metadata():
         output.append({'name': f['candidate'], 'screenName': f['screenName'], 'followers': f['followers'],
                        'retweets': f['retweetAvg'], 'favorites': f['favoriteAvg']})
     return jsonify(output)
-    
+
 
 @app.route("/followercount/<chosenCandidate>", methods=['GET'])
 def followercount(chosenCandidate):
