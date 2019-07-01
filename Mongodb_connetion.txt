@@ -1,0 +1,5 @@
+MONGO_HOST = "ds339177.mlab.com"
+MONGO_PORT = 39177
+MONGO_DB = "heroku_lql33jhv"
+MONGO_USER = "heroku_lql33jhv"
+MONGO_PASS = "m6km4aqppguggitp33bp0enh47"

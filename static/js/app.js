@@ -1,3 +1,4 @@
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
@@ -14,13 +15,19 @@ function init() {
     // Use the first sample from the list to build the initial plots
     const handle = candidates[0]["screenName"];
     buildCharts(handle);
+    buildLineGraph(handle);
+    buildBulletChart(handle);
     buildBarChart();
+    buildTrumpBarChart();
   });
 }
 
 function optionChanged(newCandidate) {
   // Fetch new data each time a new candidate is selected
+  buildBulletChart(newCandidate);
   buildCharts(newCandidate);
+  buildLineGraph(newCandidate);
+  buildGaugeChart(newCandidate);
 }
 
 init();
